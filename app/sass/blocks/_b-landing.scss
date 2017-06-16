@@ -1,0 +1,33 @@
+.b-landing {
+  display: block;
+  position: relative;
+  padding-top: 14%;
+  @extend .clearfix;
+  margin-bottom: 29%;
+}
+.b-landing__left, .b-landing__right {
+  width: 52%;
+  float: left;
+  // position: relative;
+  img {
+    width: 75%;
+    float: right
+  }
+  h1 {
+    position: absolute;
+    bottom:0;
+    font-size: 22px;
+  }
+}
+.b-landing__right {
+  width: 48%;
+  padding-left: 6%;
+  h1 {
+    position: absolute;
+    bottom: 0;
+    font-size: 64px;
+    font-weight: bold;
+    font-weight: 400;
+    margin-bottom: 5%;
+  }
+}

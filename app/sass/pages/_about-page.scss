@@ -1,0 +1,48 @@
+.about-page {
+  overflow: scroll;
+  .header {
+    top:0;
+  }
+  .text-block {
+    padding-top:150px;
+    padding-right: 100px;
+    @include breakpoint(xlarge){
+      padding-top:170px;
+    }
+    @include breakpoint(mobile){
+      padding:60px 10px 0 ;
+
+    }
+  }
+}
+.container {
+  width: 100%;
+  margin-top: 12%;
+  margin-bottom: 5%;
+  li {
+    display: inline-block;
+    margin: 0 2.3%;
+    vertical-align: top;
+    & {
+      .text-block {
+        text-align: left;
+      }
+    }
+  }
+  @include breakpoint(xlarge){
+    margin-bottom:10%;
+  }
+  @include breakpoint(mobile){
+    margin-top:0px;
+    padding-top:100px;
+  }
+}
+.big-a {
+  width: 220px;
+  @include breakpoint(xlarge){
+    width: auto;
+  }
+  @include breakpoint(mobile){
+    width: 150px;
+  }
+}

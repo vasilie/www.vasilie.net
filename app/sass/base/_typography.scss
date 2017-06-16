@@ -1,0 +1,47 @@
+$text__family--Roboto:  'Roboto', sans-serif;
+$text__family--UniSans:  'Uni Sans', sans-serif;
+$text__family--Press:  'Press', sans-serif;
+$base__font-size: 16px !default;
+$base__line: 30px !default;
+$text__family--Roboto-Condensed: 'Roboto Condensed', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700');
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500,300);
+@import url(https://fonts.googleapis.com/css?family=VT323);
+@font-face {
+    font-family: 'Uni Sans';
+    src: url('/ui/uni-sans-heavy.otf') format('opentype'),
+}
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $text__family--Roboto;
+	font-size: $base__font-size;
+  line-height: $base__line;
+  color:#222;
+  
+}
+a {
+  color: inherit;
+}
+p {
+  font-size:16px;
+  line-height: 30px;
+}
+@font-face {
+  font-family: 'Press';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Press Start 2P'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7ozT1DHLc-lgcGofyQSe5eyY.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Press';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Press Start 2P'), local('PressStart2P-Regular'), url(https://fonts.gstatic.com/s/pressstart2p/v4/8Lg6LX8-ntOHUQnvQ0E7o69WAFmVxfVhVkWhl-QDeAk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+  font-family: 'Press';
+  src: url(../../assets/font/PressStart2P.ttf);
+}

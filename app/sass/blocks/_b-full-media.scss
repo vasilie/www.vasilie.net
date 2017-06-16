@@ -1,0 +1,13 @@
+.b-full-media {
+  display: block;
+
+  @extend .clearfix;
+  img {
+    width: 100%;
+  }
+}
+.b-full-media--slim {
+  @extend .b-full-media;
+  padding:0 23%;
+  margin-bottom: 16%;
+}

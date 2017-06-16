@@ -1,0 +1,3 @@
+@function cvp($target, $container) {
+  @return ($target / $container) * 100vw;
+}
