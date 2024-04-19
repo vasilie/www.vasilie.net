@@ -59,7 +59,6 @@ a:hover, a:active, a:focus {
 	outline:none;
 }
 
-
 :root {
     /* One Dark color theme */ 
     --background: #21252b;
@@ -71,7 +70,8 @@ a:hover, a:active, a:focus {
     --blue: #61afef;
     --magenta: #c678dd;
     --green: #98c379;
-  }
+    --asciiOpacity: 0.3;
+}
 
 body {
     background-color: var(--background);
@@ -142,3 +142,42 @@ body {
 .author-name {
     color: var(--magenta);
 }
+
+.blue {
+    color: var(--blue);
+}
+
+.divider {
+    color: var(--yellow);
+}
+
+.heading {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    49% {
+        opacity: 0;
+    }
+    50% {
+        opacity: var(--asciiOpacity);
+    }
+    100% {
+        opacity: var(--asciiOpacity);
+    }
+}
+
+.tag {
+    white-space: pre;
+    color: var(--magenta);
+    width: 970px;
+    opacity: var(--asciiOpacity);
+    animation: blink 1s infinite;
+    position: absolute;
+    bottom: 220px;
+}
+
