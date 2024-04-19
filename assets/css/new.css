@@ -107,13 +107,13 @@ body {
 }
 
 .bottom-bar {
-    height: 18px;
+    height: 22px;
     position: fixed;
     width: 100%;
     background-color: var(--background-bright);
     bottom: 0;
     font-size: 12px;
-    line-height: 18px;
+    line-height: 22px;
     text-align: right;
     padding: 0px 8px;
     display: flex;
@@ -180,4 +180,3 @@ body {
     position: absolute;
     bottom: 220px;
 }
-
