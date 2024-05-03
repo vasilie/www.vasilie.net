@@ -178,5 +178,5 @@ body {
     opacity: var(--asciiOpacity);
     animation: blink 1s infinite;
     position: absolute;
-    bottom: 220px;
+    bottom: 240px;
 }
