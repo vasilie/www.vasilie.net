@@ -85,9 +85,7 @@ body {
 }
 
 .link-list {
-    padding: 40px 5px;
-    position: absolute;
-    bottom: 0;
+    padding: 10px;
 }
 
 .list-item {
@@ -96,11 +94,6 @@ body {
     text-transform: lowercase;
 }
 
-.list-item:before {
-    content: "➜";
-    color: var(--red);
-    margin-right: 17px;
-}
 
 .list-item:hover {
     color: var(--yellow);
@@ -172,6 +165,7 @@ body {
 }
 
 .tag {
+    font-size: 7px;
     white-space: pre;
     color: var(--magenta);
     width: 970px;
@@ -179,4 +173,115 @@ body {
     animation: blink 1s infinite;
     position: absolute;
     bottom: 240px;
+
 }
+
+
+/* Osnovni stilovi za navigaciju */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #21252b;
+}
+
+.logo {
+     color: var(--magenta);
+    font-size: 24px;
+}
+
+.link-wrap {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    gap: 20px;
+    list-style: none;
+}
+
+
+
+.link-wrap .list-item a {
+    color: var(--magenta);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+
+.link-wrap .list-item:first-child {
+    margin-left: 50px;
+}
+
+
+/* Stilovi za hamburger dugme */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Stilovi za mobilnu verziju */
+@media (max-width: 768px) {
+    .link-wrap {
+        display: none;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        width: 100%;
+        background-color: #21252b;
+    }
+
+    .link-wrap .list-item {
+        text-align: center;
+    }
+
+    .hamburger {
+        display: block;
+        color: var(--magenta);
+    }
+
+    .menu-toggle:checked ~ .link-wrap {
+        display: grid;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+}
+
+
+
+
+
+@media (min-width: 360px) {
+    .tag {
+     font-size: 11px;
+     
+    }
+ }
+
+@media (min-width: 480px) {
+   .tag {
+    font-size: 11px;
+   }
+}
+
+@media (min-width: 768px) {
+    .tag {
+        font-size: 16px;
+       }
+}
+
+@media (min-width: 1024px) {
+    .tag {
+        font-size: 20px;
+        bottom: 35px;
+      }
+}
+
+@media (min-width: 1200px) {
+    .tag {
+        font-size: 23px;
+      }
+}
+
+
