@@ -1,0 +1,26 @@
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == small {
+    @media (max-width: 600px) { @content; }
+  } @else if $breakpoint == medium {
+    @media (max-width: 900px) { @content; }
+  } @else if $breakpoint == large {
+    @media (max-width: 1200px) { @content; }
+  }
+}
+
+// Usage of the mixin
+.container {
+  width: 100%;
+  
+  @include respond-to(small) {
+    width: 50%;
+  }
+
+  @include respond-to(medium) {
+    width: 75%;
+  }
+
+  @include respond-to(large) {
+    width: 90%;
+  }
+}
