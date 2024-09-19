@@ -164,6 +164,7 @@ canvas.addEventListener("mousemove", function(event) {
   const mouseX = event.clientX - rectBounds.left;
   const mouseY = event.clientY - rectBounds.top;
   lastMousePosition = [mouseX, mouseY];
+  entities.forEach(entity => isHovering(mouseX, mouseY, entity) ? canvas.style.cursor = "pointer" : canvas.style.cursor = "default"); 
 });
 
 // Render function
