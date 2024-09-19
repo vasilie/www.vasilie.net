@@ -62,7 +62,7 @@ a:hover, a:active, a:focus {
 
 :root {
     /* One Dark color theme */ 
-    --background: #21252b;
+    --background: #070808;
     --background-bright: #2d313a;
     --red: #e06c75;
     --cyan: #56b6c2;
@@ -76,7 +76,7 @@ a:hover, a:active, a:focus {
 
 body {
     background-color: var(--background);
-    background: url("../images/nature-landscape-with-black-sand-beach.jpg");
+    /* background: url("../images/nature-landscape-with-black-sand-beach.jpg"); */
     color: var(--white);
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
@@ -94,7 +94,7 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: #0000008c;
+    /* background: #0000008c; */
 }
 
 .list-item {
@@ -191,4 +191,8 @@ body {
 
 .wrapper {
     overflow: hidden;
+}
+
+.canvas {
+    height: 300px;
 }
