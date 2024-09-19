@@ -25,6 +25,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+    overflow: hidden;
 }
 ol, ul {
 	list-style: none;
@@ -61,7 +62,7 @@ a:hover, a:active, a:focus {
 
 :root {
     /* One Dark color theme */ 
-    --background: #21252b;
+    --background: #070808;
     --background-bright: #2d313a;
     --red: #e06c75;
     --cyan: #56b6c2;
@@ -75,6 +76,7 @@ a:hover, a:active, a:focus {
 
 body {
     background-color: var(--background);
+    /* background: url("../images/nature-landscape-with-black-sand-beach.jpg"); */
     color: var(--white);
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
@@ -82,12 +84,17 @@ body {
     font-style: normal;
     letter-spacing: -0.7px;
     min-height: 100%;
+    background-size: 150%;
+    backdrop-filter: saturate(0.5) blur(6px);
+    height: 100vh;
 }
 
 .link-list {
-    padding: 40px 5px;
+    padding: 17px 5px 40px;
     position: absolute;
     bottom: 0;
+    width: 100%;
+    /* background: #0000008c; */
 }
 
 .list-item {
@@ -179,4 +186,13 @@ body {
     animation: blink 1s infinite;
     position: absolute;
     bottom: 240px;
+    
+}
+
+.wrapper {
+    overflow: hidden;
+}
+
+.canvas {
+    height: 300px;
 }
