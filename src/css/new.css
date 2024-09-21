@@ -104,9 +104,9 @@ body {
 }
 
 .list-item:before {
-    content: "➜";
+    content: "->";
     color: var(--red);
-    margin-right: 17px;
+    margin-right: 14px;
 }
 
 .list-item:hover {

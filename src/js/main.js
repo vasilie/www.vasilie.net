@@ -1,5 +1,5 @@
-import './app.js';
 import '../css/new.css'
+import './app.js';
 import { wording6 } from './wording.js';
 
 window.onload = (event) => {
