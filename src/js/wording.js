@@ -1,4 +1,4 @@
-const wording = `                                                                                                                                                                                                       
+export const wording = `                                                                                                                                                                                                       
                                                                                                                                   ..                                                                    
                                                                                                                                 ;;;;:                                                                   
                                                                                                                    :+ll+;     :l%lll%+                                                                  
@@ -32,7 +32,7 @@ const wording = `
                                 :;;;:    
 `;
 
-const wording2 = `
+export const wording2 = `
                                                                                         .          .                                                  
                                                                                        :;:     ;l??+                                                  
              .                                                                       :l%l%?;  ;?llll?           :+ll;                                 
@@ -58,7 +58,7 @@ const wording2 = `
                        :+??+:                                                                                                                         
 `;
 
-const wording3 = `
+export const wording3 = `
                                                                                           
                                                                                                                         
                                                                                                                       
@@ -82,7 +82,7 @@ const wording3 = `
                                                                                       
 `
 
-const wording4 = `                                                                                                                                                                                                           
+export const wording4 = `                                                                                                                                                                                                           
                                                                                                               
                                                                .lll  :llll         ..                         
        lll.             lll.                 :lllllll.         llll  lllll        llll:                       
@@ -101,7 +101,7 @@ const wording4 = `
                  llll                lll                                                                      
                                                                                                            
                                                                                                               `
-const wording5 = `
+export const wording5 = `
                                                                                                                         
                                                                       cc    cccc                                        
                                                                      cccc   cllcc         cccc                          
@@ -127,7 +127,7 @@ const wording5 = `
                                                                                                                                                                                                         
                                                                                                                                                                                                         
                                                                                                                                                                                                         
-const wording6 = `
+export const wording6 = `
                                                     AAA  AAA        AA                    
      AAAA           AAA              AAAAAAA       AAAA AAAA       AAA                    
      AAJA          AAA   AAA      AAAAAAAAAAAc     AAA  AAA              AAAAAAAAAA:      
@@ -143,7 +143,7 @@ const wording6 = `
               AAA             AAA                                                         
 `;                                                                                                                                                                                  
                                                                                                                                                                                                         
-const wording7 = `
+export const wording7 = `
                                           
      AAAA           AAA                 
      AAJA          AAA          
