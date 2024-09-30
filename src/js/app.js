@@ -1,4 +1,4 @@
-import { checkIsColliding } from "../js/lib/helpers/collisionHelper";
+import { checkIsColliding, handleCollision } from "../js/lib/helpers/collisionHelper";
 import { GetRandomHSLColor } from "../js/lib/helpers/colorHelper";
 
 const canvas = document.getElementById('canvas');
@@ -44,6 +44,9 @@ class Entity {
     this.bounces = 0;
     this.goldPerBounce = randomRange(2, 4); 
     this.goldEarned = 0;
+    this.lastCollision = null;
+    this.lastCollisionId = null;
+    this.m = 1;
 
     this.start = function () {
       currentEntityPrice = Math.floor(currentEntityPrice * PRICE_INCREASE * PRICE_INCREASE);
@@ -54,19 +57,26 @@ class Entity {
       let isColliding = false;
       for (let i = 0; i < entities.length; i++) {
         const entity = entities[i];
-        if (this.id != entity.id) {
+        if (this.id != entity.id ) {
           isColliding = checkIsColliding(this, entity);
-          break;
+          if (isColliding) {
+            if (Date.now() - this.lastCollision > 100 && this.lastCollisionId != entity.id) {
+              this.lastCollision = Date.now();
+              this.lastCollisionId = entity.id;
+              // const {newVelocityX, newVelocityY} = handleCollision(this, entity);
+              // this.velocityX = newVelocityX;
+              // this.velocityY = newVelocityY;
+              break;
+            }
+
+          }
         }
       }
       return isColliding;
     }
-    this.update = () => {
+    this.update = (deltaTime) => {
       this.ageText = timeSince(this.born);
       this.age =  Math.floor((Date.now() - this.born) / 100);
-      if (this.isColliding()) {
-        this.velocityX *= -1;
-      }
       if (isHovering(lastMousePosition[0], lastMousePosition[1], this)) {
         this.isHovered = true;
         canvas.style.cursor = "pointer"; // Change cursor on hover
@@ -96,6 +106,7 @@ class Entity {
 
           this.goldEarned += Math.floor(1 * this.goldPerBounce);
           gold += Math.floor(1 * this.goldPerBounce);
+          this.lastCollisionId = "vertical-ground"
         }
 
         if (this.x >= WIDTH - this.width || this.x < -1 ) {
@@ -103,10 +114,12 @@ class Entity {
           this.bounces += 1;
           this.goldEarned += Math.floor(1 * this.goldPerBounce);
           gold += Math.floor(1 * this.goldPerBounce);
+          this.lastCollisionId = "horizontal-ground"
         }
 
-        this.y += this.velocityY;
-        this.x += this.velocityX;
+        this.y += this.velocityY * deltaTime * 0.08;
+        this.x += this.velocityX * deltaTime * 0.08;
+        this.isColliding();
       }
     }
 
@@ -147,10 +160,8 @@ class Entity {
 
 }
 
-// Start function
 function start() {
-  // Initialize any state or variables
-  // Start the animation loop
+
   for (let i = 0; i < 0; i++) {
     entities[i] = new Entity();
     entities[i].start();
@@ -158,14 +169,13 @@ function start() {
   requestAnimationFrame(mainLoop);
 }
 
-// Update function
 function update(deltaTime) {
-  // Update the state of the animation
-  // Example: move a shape, update position, etc.
+
   for (let i = 0; i < entities.length; i++) {
     let entity = entities[i];
-    entity.update();
+    entity.update(deltaTime);
   }
+
 }
 
 function randomRange(min, max) {
@@ -374,11 +384,14 @@ function GetRandomNote(x) {
   const notesKeyArray = Object.keys(n);
   const randomItemNo = Math.floor(Math.random() * notesKeyArray.length);
   let freqPerWidth = WIDTH / notesKeyArray.length;
-  let currentTone = Math.floor(x / freqPerWidth);
-  const freq = n[notesKeyArray[currentTone]];
-  // playNote(freq);
-  playNote(freq* 2, "sawtooth", 0.02);
-  playNote(freq* 2.5, "square", 0.05);
+  let currentTone = Math.ceil(x / freqPerWidth);
+
+  if (currentTone > 0) {
+    const freq = n[notesKeyArray[currentTone]];
+    // playNote(freq);
+    playNote(freq* 2, "sine", 0.01);
+    playNote(freq* 2.5, "square", 0.03);
+  }
 }
 // function keyDown(event) {
 //   let key = event.key;
