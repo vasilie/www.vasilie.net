@@ -13,6 +13,19 @@ const HEIGHT = canvas.height;
 const PRICE_INCREASE = 1.65;
 
 let lastMousePosition = [24240, 2424240];
+window.soundActive = true;
+
+function toggleSound() {
+  window.soundActive = !window.soundActive;
+  console.log(window.soundActive);
+  if (!window.soundActive) {
+    document.getElementById("speaker").classList.add('muted');
+  } else {
+    document.getElementById("speaker").classList.remove('muted');
+  }
+} 
+
+window.toggleSound = toggleSound; 
 
 // Variables for animation
 let lastTime = 0;
@@ -35,7 +48,7 @@ class Entity {
     this.height = 25;
     this.x = x || 0;
     this.y = y || 0;
-    this.velocityX = Math.random() * 2 - 1;
+    this.velocityX = 1+ Math.random() * 2 - 1;
     this.velocityY = 0;
     this.color = GetRandomHSLColor();
     this.border = 2;
@@ -51,6 +64,8 @@ class Entity {
     this.start = function () {
       currentEntityPrice = Math.floor(currentEntityPrice * PRICE_INCREASE * PRICE_INCREASE);
       this.id = getId();
+      this.width = 20 + this.m * 5;
+      this.height = 20 + this.m * 5;
     };
 
     this.isColliding = () => {
@@ -59,16 +74,19 @@ class Entity {
         const entity = entities[i];
         if (this.id != entity.id ) {
           isColliding = checkIsColliding(this, entity);
-          if (isColliding) {
-            if (Date.now() - this.lastCollision > 100 && this.lastCollisionId != entity.id) {
-              this.lastCollision = Date.now();
-              this.lastCollisionId = entity.id;
-              // const {newVelocityX, newVelocityY} = handleCollision(this, entity);
-              // this.velocityX = newVelocityX;
-              // this.velocityY = newVelocityY;
-              break;
-            }
 
+          if (isColliding) {
+            console.log("collidin", Date.now() - this.lastCollision, this.lastCollisionId);
+            if (Date.now() -  this.lastCollisionId !== this.id) {
+              if (this.lastCollisionId != entity.id) { 
+                this.lastCollision = Date.now();
+                this.lastCollisionId = entity.id;
+                handleCollision(this, entity);
+                this.velocityY -= 0.18;
+                this.velocityX -= 0.18;
+                break;
+              }
+            }
           }
         }
       }
@@ -94,19 +112,29 @@ class Entity {
         } else {
           this.velocityY == friction;
         }
-          // x, y, width, height
-        if (this.y >= HEIGHT - this.height || this.y < -1 ) {
-          this.velocityY *= -1;
-          this.bounces += 1;
-          let freqPerOctave = 440 / 12;
+        // x, y, width, height
+        if (this.y >= HEIGHT - this.height || this.y < 0 ) {
+          this.y = HEIGHT - this.height;
+          if (Math.abs(this.velocityX) < 0.15) {
+            this.velocityX = 0;
+          }
          
-          // let penguin = Math.floor(WIDTH / freqPerWidth); 
-          // playFrequency(220 +  currentTone * freqPerOctave, 0.025);
-          GetRandomNote(this.x);
+            this.velocityY *= -0.99;
+            if (this.velocityY > 0) {
+              this.velocityY -=0.15;
+            } else {
+              this.velocityY += 0.15;
+            }
 
-          this.goldEarned += Math.floor(1 * this.goldPerBounce);
-          gold += Math.floor(1 * this.goldPerBounce);
-          this.lastCollisionId = "vertical-ground"
+          this.velocityX *= 0.99;
+
+          if (Math.abs(this.velocityY) > 0) {
+            this.bounces += 1;
+            GetRandomNote(this.x);
+            this.goldEarned += Math.floor(1 * this.goldPerBounce);
+            gold += Math.floor(1 * this.goldPerBounce);
+            this.lastCollisionId = "vertical-ground"
+          }
         }
 
         if (this.x >= WIDTH - this.width || this.x < -1 ) {
@@ -119,8 +147,15 @@ class Entity {
 
         this.y += this.velocityY * deltaTime * 0.08;
         this.x += this.velocityX * deltaTime * 0.08;
+        // console.log(Math.abs(this.velocityY));
+        // if (Math.abs(this.velocityY) < 0.0002 ) {
+        //   this.velocityY = 0;
+        //   this.y = HEIGHT - this.height;
+        // }
         this.isColliding();
       }
+      // console.log("this.velocityX", this.velocityX);
+
     }
 
     this.render = () => {
@@ -175,7 +210,6 @@ function update(deltaTime) {
     let entity = entities[i];
     entity.update(deltaTime);
   }
-
 }
 
 function randomRange(min, max) {
@@ -286,7 +320,11 @@ const actx = new AudioContext();
 
 function playNote(freq = 261.63, type = "sine", decay = 0.1) {
   // Create a new oscillator and audio graph for each keypress
-  createOsc(freq, type, decay);
+  //
+
+  if (window.soundActive) {
+    createOsc(freq, type, decay);
+  }
 }
 
 function createOsc(freq, type, decay) {
@@ -302,7 +340,7 @@ function createOsc(freq, type, decay) {
 
   // set the volume value so that we do not overload the destination
   // when multiple voices are played simmultaneously
-  vol.gain.value = 0.1;
+  vol.gain.value = 0.02;
 
   //create the audio graph
   osc.connect(vol).connect(compressor).connect(actx.destination);
@@ -334,9 +372,9 @@ const n = {
   // 'E1': 41.20,
   // 'F#1': 46.25,
   // 'G1': 49.00,
-  'A1': 55.00,
+  // 'A1': 55.00,
   // 'B1': 61.74,
-  'C#2': 69.30,
+  // 'C#2': 69.30,
   // 'D2': 73.42,
 
   // 'E2': 82.41,
@@ -349,19 +387,19 @@ const n = {
 
   'E3': 164.81,
   'F#3': 185.00,
-  // 'G3': 196.00,
+  'G3': 196.00,
   'A3': 220.00,
-  // 'B3': 246.94,
+  'B3': 246.94,
   'C#4': 277.18,
   'D4': 293.66,
 
   'E4': 329.63,
-  'F#4': 369.99,
-  'G4': 392.00,
-  'A4': 440.00,
+  // 'F#4': 369.99,
+  // 'G4': 392.00,
+  // 'A4': 440.00,
   // 'B4': 493.88,
   // 'C#5': 554.37,
-  'D5': 587.33,
+  // 'D5': 587.33,
 
   // 'E5': 659.25,
   // 'F#5': 739.99,
@@ -387,10 +425,10 @@ function GetRandomNote(x) {
   let currentTone = Math.ceil(x / freqPerWidth);
 
   if (currentTone > 0) {
-    const freq = n[notesKeyArray[currentTone]];
+    const freq = n[notesKeyArray[currentTone-1]];
     // playNote(freq);
-    playNote(freq* 2, "sine", 0.01);
-    playNote(freq* 2.5, "square", 0.03);
+    playNote(freq, "sine", 0.07);
+    playNote(freq* 2, "sine", 0.07);
   }
 }
 // function keyDown(event) {

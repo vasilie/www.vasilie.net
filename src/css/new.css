@@ -196,3 +196,36 @@ body {
 .canvas {
     height: 300px;
 }
+
+.speaker-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  .mute {
+    display: block;
+  }
+
+  .wave {
+    display: none;
+  }
+
+  &.muted {
+    .mute {
+      display: none;
+    }
+
+    .wave {
+      display: block;
+    }
+  }
+}
+
+.speaker {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+ }
+
+
